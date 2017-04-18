@@ -1,6 +1,6 @@
 var fs = require("fs");
 var Promise = require("bluebird");
-var tinyliquid = require("tinyliquid");
+var tinyliquid = require("megaliquid");
 var path = require("path");
 
 var liquify = function (contents, locals, includeBase, prefix, filters) {
@@ -13,7 +13,6 @@ var liquify = function (contents, locals, includeBase, prefix, filters) {
 	if (!contents) {
 		contents = '';
 	}
-	;
 
 	if (typeof contents != "string") {
 		template = contents;
@@ -76,7 +75,10 @@ var liquify = function (contents, locals, includeBase, prefix, filters) {
 };
 
 function isAbsolute(p) {
-	if (path.isAbsolute) return path.isAbsolute(p);
+	if (path.isAbsolute) {
+		return path.isAbsolute(p);
+	}
+
 	return path.normalize(p + '/') === path.normalize(path.resolve(p) + '/');
 }
 

@@ -1,11 +1,11 @@
 {
-  "name": "gulp-liquify",
+  "name": "gulp-megaliquify",
   "version": "0.0.6",
-  "description": "Render Liquid templates in Gulp using TinyLiquid",
+  "description": "Render Liquid templates in Gulp using MegaLiquid",
   "main": "",
-  "repository": "https://github.com/fchasen/gulp-liquify.git",
-  "homepage": "https://github.com/fchasen/gulp-liquify/",
-  "bugs": "https://github.com/fchasen/gulp-liquify/issues/",
+  "repository": "https://github.com/DeathMark/gulp-megaliquify.git",
+  "homepage": "https://github.com/DeathMark/gulp-megaliquify",
+  "bugs": "https://github.com/DeathMark/gulp-megaliquify/issues/",
   "directories": {
     "test": "test"
   },
@@ -18,7 +18,7 @@
     "template",
     "liquify"
   ],
-  "author": "fchasen@gmail.com",
+  "author": "joomcoder@gmail.com",
   "license": "MIT",
   "devDependencies": {
     "gulp": "^3.9.0",
@@ -31,6 +31,6 @@
     "gulp-util": "^3.0.1",
     "lodash": "^3.10.0",
     "through2": "^2.0.0",
-    "tinyliquid": "^0.2.29"
+    "megaliquid": "^0.2.29"
   }
 }
