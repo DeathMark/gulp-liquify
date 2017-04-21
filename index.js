@@ -2,7 +2,7 @@ var through = require('through2');
 var gutil = require('gulp-util');
 var PluginError = gutil.PluginError;
 var _ = require("lodash");
-var liquify = require('./megaliquify');
+var megaliquify = require('./megaliquify');
 
 // consts
 const PLUGIN_NAME = 'gulp-megaliquify';
@@ -34,7 +34,13 @@ function gulpLiquify(locals, options) {
 			tempLocals = _.defaults(file.locals, tempLocals);
 		}
 
-		liquify(file.contents.toString("utf-8"), tempLocals, settings.base || file.base, settings.prefix, settings.filters)
+		var contents	= file.contents.toString("utf-8");
+
+		if (contents.indexOf('{% layout') == -1 || contents.indexOf('{%- layout') == -1) {
+			contents	= '{% layout \'theme\' %}\n' + contents;
+		}
+
+		megaliquify(contents, tempLocals, settings.base || file.base, settings.prefix, settings.filters)
 			.then(function (result) {
 				file.contents = new Buffer(result, "utf-8");
 				this.push(file);
@@ -51,7 +57,7 @@ function gulpLiquify(locals, options) {
 	return stream;
 }
 
-gulpLiquify.liquify = liquify;
+gulpLiquify.megaliquify = megaliquify;
 
 // exporting the plugin main function
 module.exports = gulpLiquify;

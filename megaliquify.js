@@ -1,11 +1,11 @@
 var fs = require("fs");
 var Promise = require("bluebird");
-var tinyliquid = require("megaliquid");
+var megaliquid = require("megaliquid");
 var path = require("path");
 
-var liquify = function (contents, locals, includeBase, prefix, filters) {
+var megaliquify = function (contents, locals, includeBase, prefix, filters) {
 	var template;
-	var context = tinyliquid.newContext({
+	var context = megaliquid.newContext({
 		locals: locals,
 		filters: filters
 	});
@@ -17,7 +17,7 @@ var liquify = function (contents, locals, includeBase, prefix, filters) {
 	if (typeof contents != "string") {
 		template = contents;
 	} else {
-		template = tinyliquid.compile(contents);
+		template = megaliquid.compile(contents);
 	}
 
 	return new Promise(function (resolve, reject) {
@@ -61,7 +61,7 @@ var liquify = function (contents, locals, includeBase, prefix, filters) {
 					return callback(err);
 				}
 
-				var ast = tinyliquid.parse(text);
+				var ast = megaliquid.parse(text);
 				callback(null, ast);
 			});
 		});
@@ -82,4 +82,4 @@ function isAbsolute(p) {
 	return path.normalize(p + '/') === path.normalize(path.resolve(p) + '/');
 }
 
-module.exports = liquify;
+module.exports = megaliquify;
