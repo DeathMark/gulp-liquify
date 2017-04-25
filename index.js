@@ -13,7 +13,8 @@ function gulpLiquify(locals, options) {
 	var settings = _.defaults(options || {}, {
 		"base": false,
 		"prefix": false,
-		"filters": {}
+		"filters": {},
+		"layout": false
 	});
 
 	// creating a stream through which each file will pass
@@ -36,8 +37,10 @@ function gulpLiquify(locals, options) {
 
 		var contents	= file.contents.toString("utf-8");
 
-		if (contents.indexOf('{% layout') == -1 || contents.indexOf('{%- layout') == -1) {
-			contents	= '{% layout \'theme\' %}\n' + contents;
+		if (settings.layout) {
+			if (contents.indexOf('{% layout') == -1 || contents.indexOf('{%- layout') == -1) {
+				contents	= '{% layout \'theme\' %}\n' + contents;
+			}
 		}
 
 		megaliquify(contents, tempLocals, settings.base || file.base, settings.prefix, settings.filters)
