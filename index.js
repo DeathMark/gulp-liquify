@@ -1,3 +1,4 @@
+var path		= require('path');
 var through = require('through2');
 var gutil = require('gulp-util');
 var PluginError = gutil.PluginError;
@@ -25,6 +26,8 @@ function gulpLiquify(locals, options) {
 		if (file.isStream()) {
 			return this.emit('error', new PluginError('gulp-megaliquify', 'Streaming not supported'));
 		}
+
+		global.megaliquify_file	= path.basename(file.path, '.liquid');
 
 		// Clone a fresh copy, so as not to affect others
 		var tempLocals = locals ? _.clone(locals) : {};
